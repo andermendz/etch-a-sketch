@@ -1,20 +1,26 @@
-#container{
-    display:flex;
-    margin: 100px;
-    align-items:center;
-    justify-content:center;
+body {
+    display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #efefef;
+  }
+
+  #title, #container {
+    padding: 1.4em;
+  }
+
+#container {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.line{
-    display:flex;
-  
-
+.line {
+  display: flex;
 }
 
-.box{
-    border: 1px solid red;
-    margin: 10px;
-    padding: 10px;
-    margin: 0px;
+.box {
+  border: 1px solid rgb(139, 139, 139);
+  padding: 5px;
 }
