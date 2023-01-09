@@ -1,14 +1,16 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #efefef;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #efefef;
+}
 
-  #title, #container, #foot {
-    margin: 1em;
-  }
+#title,
+#container,
+#foot {
+  margin: 1em;
+}
 
 #container {
   justify-content: center;
@@ -22,7 +24,6 @@ body {
 .line {
   display: flex;
   flex-grow: 1;
-
 }
 
 .box {
