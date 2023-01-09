@@ -25,10 +25,12 @@ function generator() {
  }
     
 var ratio = prompt("How many boxes and lines?")
+var hline = 100 / ratio;
+console.log(hline)
   for (i = 0; i < ratio; i++) {
     const line = document.createElement("div");
     line.setAttribute("class", "line");
-  
+    line.style.height = `${hline}%`  
     for (j = 0; j < ratio; j++) {
       const box = document.createElement("div");
       box.setAttribute("class", "box");
