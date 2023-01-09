@@ -6,8 +6,8 @@ body {
     background-color: #efefef;
   }
 
-  #title, #container {
-    margin: 1.4em;
+  #title, #container, #foot {
+    margin: 1em;
   }
 
 #container {
@@ -27,7 +27,7 @@ body {
 
 .box {
   display: flex;
-  border: 1px solid rgb(139, 139, 139);
+  border: 0.1px solid rgb(139, 139, 139);
   flex-grow: 1;
   height: 100%;
 }
