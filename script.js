@@ -1,46 +1,83 @@
-const container = document.querySelector("#container");
-const generate = document.querySelector("#generate");
+let sketchGrid = document.getElementById("sketch-grid");
+let button = document.querySelectorAll("button");
+let inputColor = document.getElementById('input-color')
+let optionsGrid = document.getElementById('options-grid')
+let gridReset = document.getElementById('grid-reset')
 
-generate.addEventListener("click", () => {
-  // call the functions
-  generator();
-  reactions();
-});
+let gridTen = document.getElementById("10");
+let gridTwent = document.getElementById("20");
+let gridThird = document.getElementById("30");
+let gridFour = document.getElementById("40");
+let gridFif = document.getElementById("50");
 
-function reactions() {
-  // added reactions
-  const boxes = document.querySelectorAll(".box");
+let latestProportion = 0;
+renderGrid(30);
 
-  boxes.forEach((box) => {
-    box.addEventListener("mousemove", () => {
-      box.setAttribute("style", "background-color:black;");
+gridReset.onclick = () =>{
+  renderGrid(latestProportion)
+}
+
+
+function renderGrid(proportion) {
+  sketchGrid.innerHTML = "";
+  var gridProportion = proportion;
+  var proportionRatio = gridProportion * gridProportion;
+
+  for (let i = 0; i <= proportionRatio; i++) {
+    let square = document.createElement("div");
+    square.classList.add("square");
+    square.id = `square-${i}`;
+    sketchGrid.appendChild(square);
+  }
+  sketchGrid.style.gridTemplateColumns = `repeat(${gridProportion},  1fr)`;
+  sketchGrid.style.gridTemplateRows = `repeat(${gridProportion}, 1fr)`;
+
+  let squares = document.querySelectorAll(".square");
+  squares.forEach((square) => {
+    square.addEventListener("mousemove", (e) => {
+      if (isMouseDown) {
+        console.log(square.id);
+        square.style.backgroundColor = inputColor.value;
+      }
     });
   });
+
+  latestProportion = proportion;
 }
 
-function generator() {
-  while (container.lastChild) {
-    container.removeChild(container.lastChild);
-  }
-  // ratio conditionals
-  var ratio = prompt("How many boxes and lines from 1 - 100?");
+let isMouseDown = false;
 
-  while (ratio > 100 || ratio <= 0) {
-    var ratio = prompt("How many boxes and lines from 1 - 100?");
+document.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+  if (e.button === 0) {
+    isMouseDown = true;
   }
-  if (ratio > 0 || ratio <= 100) {
-    var hline = 100 / ratio; // the 100 percent of the heigh / amount of lines = the heigh of each line
-    for (i = 0; i < ratio; i++) {
-      // generate the same amount of lines and boxes
-      const line = document.createElement("div");
-      line.setAttribute("class", "line");
-      line.style.height = `${hline}%`;
-      for (j = 0; j < ratio; j++) {
-        const box = document.createElement("div");
-        box.setAttribute("class", "box");
-        line.appendChild(box);
-      } // add the generated lines to the container
-      container.appendChild(line);
+});
+
+document.addEventListener("mouseup", () => {
+  isMouseDown = false;
+});
+
+
+
+function renderProportionsLists(){
+  proportions = [10,20,40,60]
+
+  proportions.forEach((proportion)=>{
+
+    proportionToggle = document.createElement('button');
+    proportionToggle.id = proportion;
+    proportionToggle.classList.add('grid-proportion')
+    
+    proportionToggle.onclick = () =>{
+      renderGrid(proportion)
     }
-  }
+
+
+    proportionToggle.innerHTML = ` ${proportion}`
+    optionsGrid.append(proportionToggle)
+  }) 
 }
+
+renderProportionsLists()
+
